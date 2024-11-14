@@ -278,10 +278,45 @@ public class Driver {
                     }
                     break;
                 case 9:
-                    // Jayden's
+                    int count = 0;
+                    for(int i = 0; i < accountList.length; i++) {
+                        String type = accountList[i].getAccountType();
+                        if(type.equals("S")) {
+                            count += 1;
+                        }
+                    }
+                    String[] firstNames = new String[count];
+                    count = 0;
+                    for(int i = 0; i < accountList.length; i++) {
+                        String type = accountList[i].getAccountType();
+                        if(type.equals("S")) {
+                            firstNames[count] = accountList[i].getFirstName();
+                            count += 1;
+                        }
+                    }
+                    bubbleSort(firstNames);
+                    for(String target : firstNames) {
+                        for(int i = 0; i < accountList.length; i++) {
+                            if(accountList[i].getFirstName().equals(target)){
+                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
+                                System.out.println("Balance: $" + accountList[i].getBalance() + "\n");
+                            }
+                        }
+                    }
                     break;
                 case 10:
                     System.exit(0);
+            }
+        }
+    }
+    public static void bubbleSort(String[] list) {
+        for (int i = 0; i < list.length - 1; i++) {
+            for (int j = 0; j < list.length - i - 1; j++) {
+                if (list[j].compareTo(list[j + 1]) > 0) {
+                    String temp = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = temp;
+                }
             }
         }
     }
