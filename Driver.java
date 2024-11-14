@@ -173,27 +173,33 @@ public class Driver {
                     System.out.println("Interest added to all accounts");
                     break;
                 case 6:
-                    for(int i = 0; i < accountList.length; i++) {
-                        int person = accountList[i].getPerson();
-                        if (person == 1) {
-                            if(accountList[i].getBalance() < 100) {
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        int thePerson = accountList.getAccount(i).getPerson();
+                        if (thePerson == 1) {
+                            if(accountList.getAccount(i).getBalance() < 100) {
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
                                 System.out.println("*Below minimum balance fee added*");
-                                accountList[i].withdrawal(5.0);
+                                accountList.getAccount(i).withdrawal(5.0);
+                            }
+                            else{
+                                System.out.println("We don't have any accounts that satisfy these criteria");
                             }
                         }
                     }
                     break;
                 case 7:
-                    for(int i = 0; i < accountList.length; i++) {
-                        int person = accountList[i].getPerson();
-                        if (person == 2) {
-                            if(accountList[i].getBalance() > 5000) {
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        int thePerson = accountList.getAccount(i).getPerson();
+                        if (thePerson == 2) {
+                            if(accountList.getAccount(i).getBalance() > 5000) {
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
+                            }
+                            else{
+                                System.out.println("We don't have any accounts that satisfy these criteria");
                             }
                         }
                     }
@@ -279,27 +285,27 @@ public class Driver {
                     break;
                 case 9:
                     int count = 0;
-                    for(int i = 0; i < accountList.length; i++) {
-                        String type = accountList[i].getAccountType();
-                        if(type.equals("S")) {
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        String theType = accountList.getAccount(i).getAccountType();
+                        if(theType.equals("S")) {
                             count += 1;
                         }
                     }
                     String[] firstNames = new String[count];
                     count = 0;
-                    for(int i = 0; i < accountList.length; i++) {
-                        String type = accountList[i].getAccountType();
-                        if(type.equals("S")) {
-                            firstNames[count] = accountList[i].getFirstName();
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        String theType = accountList.getAccount(i).getAccountType();
+                        if(theType.equals("S")) {
+                            firstNames[count] = accountList.getAccount(i).getFirstName();
                             count += 1;
                         }
                     }
                     bubbleSort(firstNames);
                     for(String target : firstNames) {
-                        for(int i = 0; i < accountList.length; i++) {
-                            if(accountList[i].getFirstName().equals(target)){
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance() + "\n");
+                        for(int i = 1; i < accountList.getNumElements(); i++) {
+                            if(accountList.getAccount(i).getFirstName().equals(target)){
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance() + "\n");
                             }
                         }
                     }
@@ -310,7 +316,7 @@ public class Driver {
         }
     }
     public static void bubbleSort(String[] list) {
-        for (int i = 0; i < list.length - 1; i++) {
+        for (int i = 1; i < list.length - 1; i++) {
             for (int j = 0; j < list.length - i - 1; j++) {
                 if (list[j].compareTo(list[j + 1]) > 0) {
                     String temp = list[j];
