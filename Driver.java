@@ -173,10 +173,30 @@ public class Driver {
                     System.out.println("Interest added to all accounts");
                     break;
                 case 6:
-                    // Jayden's
+                    for(int i = 0; i < accountList.length; i++) {
+                        int person = accountList[i].getPerson();
+                        if (person == 1) {
+                            if(accountList[i].getBalance() < 100) {
+                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
+                                System.out.println("Balance: $" + accountList[i].getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
+                                System.out.println("*Below minimum balance fee added*");
+                                accountList[i].withdrawal(5.0);
+                            }
+                        }
+                    }
                     break;
                 case 7:
-                    // Jayden's
+                    for(int i = 0; i < accountList.length; i++) {
+                        int person = accountList[i].getPerson();
+                        if (person == 2) {
+                            if(accountList[i].getBalance() > 5000) {
+                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
+                                System.out.println("Balance: $" + accountList[i].getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
+                            }
+                        }
+                    }
                     break;
                 case 8:
                     // linear search for account by last name
