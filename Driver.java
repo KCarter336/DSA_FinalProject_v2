@@ -47,12 +47,15 @@ public class Driver {
             System.out.println(
                     "Menu: " +
                             "\n Display all accounts (1) " +
-                            "\n Deposit to an account (2) " +
-                            "\n Withdrawal from an account (3) " +
-                            "\n Add interest to all accounts (4)" +
+                            "\n Total number of accounts (2) " +
+                            "\n Open an account (3) " +
+                            "\n Open a mortgage account (4)" +
                             "\n Total number of accounts (5)" +
+                            "\n Display students accounts with balance under $100 (6)" +
+                            "\n Display employee accounts with balance over $5000 (7)" +
                             "\n Individual account actions (8)" +
-                            "\n Exit (6)" +
+                            "\n Display all saving accounts (9)" +
+                            "\n Exit  (10)" +
                             "\n Enter selection here: "
             );
             Scanner cin = new Scanner(System.in);
