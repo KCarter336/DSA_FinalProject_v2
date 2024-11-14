@@ -17,16 +17,17 @@ public class Driver {
 
         TheArray accountList = new TheArray();
 
-        Account stuChe1 = new Account("C", 1, "George", "Washington");
-        Account stuChe2 = new Account("C", 1, "John", "Adams");
-        Account stuSav1 = new Account("S", 1, "Thomas", "Jefferson");
-        Account facChe1 = new Account("C", 2, "James", "Madison");
-        Account facSav1 = new Account("S", 2, "James", "Monroe");
-        Account facSav2 = new Account("S", 2, "Andrew", "Jackson");
-        Account staChe1 = new Account("C", 3, "Martin", "Van Buren");
-        Account staChe2 = new Account("C", 3, "William", "Harrison");
-        Account staChe3 = new Account("C", 3, "John", "Tyler");
-        Account facMor1 = new Account("M", 2, "James", "Polk");
+        Account stuChe1 = new Account("C", 1, "George", "Washington", 1);
+        Account stuChe2 = new Account("C", 1, "John", "Adams", 59);
+        Account stuSav1 = new Account("S", 1, "Thomas", "Jefferson", 125);
+        Account facChe1 = new Account("C", 2, "James", "Madison", 250);
+        Account facSav1 = new Account("S", 2, "James", "Monroe", 5678);
+        Account facSav2 = new Account("S", 2, "Andrew", "Jackson", 20);
+        Account staChe1 = new Account("C", 3, "Martin", "Van Buren", 4999);
+        Account staChe2 = new Account("C", 3, "William", "Harrison", 5001);
+        Account staChe3 = new Account("C", 3, "John", "Tyler", 750);
+        Account facMor1 = new Account("M", 2, "James", "Polk", 6000);
+
 
         accountList.addAccount(stuChe1);
         accountList.addAccount(stuChe2);
@@ -173,27 +174,25 @@ public class Driver {
                     System.out.println("Interest added to all accounts");
                     break;
                 case 6:
-                    for(int i = 0; i < accountList.length; i++) {
-                        int person = accountList[i].getPerson();
-                        if (person == 1) {
-                            if(accountList[i].getBalance() < 100) {
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
-                                System.out.println("*Below minimum balance fee added*");
-                                accountList[i].withdrawal(5.0);
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        if (accountList.getAccount(i).getPerson() == 1) {
+                            if(accountList.getAccount(i).getBalance() < 100) {
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
+                                System.out.println("*Below minimum balance fee added*\n");
+                                accountList.getAccount(i).withdrawal(5.0);
                             }
                         }
                     }
                     break;
                 case 7:
-                    for(int i = 0; i < accountList.length; i++) {
-                        int person = accountList[i].getPerson();
-                        if (person == 2) {
-                            if(accountList[i].getBalance() > 5000) {
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList[i].getAccountType());
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        if (accountList.getAccount(i).getPerson() == 2 || accountList.getAccount(i).getPerson() == 3) {
+                            if(accountList.getAccount(i).getBalance() > 5000) {
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType() + "\n");
                             }
                         }
                     }
@@ -279,27 +278,27 @@ public class Driver {
                     break;
                 case 9:
                     int count = 0;
-                    for(int i = 0; i < accountList.length; i++) {
-                        String type = accountList[i].getAccountType();
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        type = accountList.getAccount(i).getAccountType();
                         if(type.equals("S")) {
                             count += 1;
                         }
                     }
                     String[] firstNames = new String[count];
                     count = 0;
-                    for(int i = 0; i < accountList.length; i++) {
-                        String type = accountList[i].getAccountType();
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        type = accountList.getAccount(i).getAccountType();
                         if(type.equals("S")) {
-                            firstNames[count] = accountList[i].getFirstName();
+                            firstNames[count] = accountList.getAccount(i).getFirstName();
                             count += 1;
                         }
                     }
                     bubbleSort(firstNames);
                     for(String target : firstNames) {
-                        for(int i = 0; i < accountList.length; i++) {
-                            if(accountList[i].getFirstName().equals(target)){
-                                System.out.println("Name: " + accountList[i].getFirstName() + " " + accountList[i].getLastName());
-                                System.out.println("Balance: $" + accountList[i].getBalance() + "\n");
+                        for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                            if(accountList.getAccount(i).getFirstName().equals(target)){
+                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance() + "\n");
                             }
                         }
                     }
