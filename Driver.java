@@ -162,8 +162,27 @@ public class Driver {
                     accountList.addAccount(added1);
                     break;
                 case 4:
-                    // Jayden's
-                    // open a mortgage account with some down payment
+                    case 4:
+                    double numOfYears;
+                    double downPayment;
+                    System.out.println("Please enter a first name: ");
+                    String firstName = cin.nextLine();
+                    System.out.println("Please enter a last name: ");
+                    String lastName = cin.nextLine();
+                    System.out.println("Student (1), staff (2), or faculty(3)?");
+                    int personType = cin.nextInt();
+                    System.out.println("Please enter an initial balance: ");
+                    double mortgageBalance = cin.nextDouble();
+                    System.out.println("Please enter down payment: ");
+                    down = cin.nextDouble();
+                    System.out.println("Please enter a time scale (years): ");
+                    years = cin.nextDouble();
+                    mortgageBalance -= down;
+                    double monthlyPayment = mortgageBalance / (years * 12);
+                    System.out.printf("Monthly payment is: $%f \n", monthlyPayment);
+                    Account added2 = new Account(personType, firstName, lastName, mortgageBalance);
+                    accountList.addAccount(added2);
+                    break;
                 case 5:
                     // all accounts.addInterest
                     for(int i = 1; i <= accountList.getNumElements(); i++) {
@@ -205,7 +224,7 @@ public class Driver {
                     proceed = false;
                     selectedAccount = 0;
                     for(int i = 1; i <= accountList.getNumElements(); i++) {
-                        String lastName = accountList.getAccount(i).getLastName();
+                        lastName = accountList.getAccount(i).getLastName();
                         if(name.equals(lastName)){
                             proceed = true;
                             selectedAccount = i;
