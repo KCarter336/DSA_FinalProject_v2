@@ -19,7 +19,8 @@ public class Account {
     private double costOfHouse;
 
     // Random account constructor
-    public Account(String accountType, int person, String lastName) {
+    public Account(String accountType, int person, String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.accountType = accountType;
         this.person = person;
@@ -27,17 +28,24 @@ public class Account {
         this.SSN = this.randSSN();
     }
     // Specified account constructor
-    public Account(String accountType, int person, double balance) {
+    public Account(String accountType, int person, String firstName, String lastName, double balance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.accountType = accountType;
         this.person = person;
         this.balance = balance;
     }
+
     // Loan account constructor
-    public Account(String accountType, int person, double costOfHouse, String isLoan, String lastName) {
-        this.accountType = accountType;
-        this.person = person;
-        this.costOfHouse = costOfHouse;
-    }
+    // commented out because it errors against the specified account constructor. I figured we could keep track of the difference
+    // by assigning loan accounts account type "M" for mortgage, and dealing with them differently on that basis
+
+//    public Account(String accountType, int person, String firstName, String lastName, double costOfHouse) {
+//        this.accountType = accountType;
+//        this.person = person;
+//        this.costOfHouse = costOfHouse;
+//    }
+
     // Random number generators for random constructor
     private int randSSN() {
         Random Generator = new Random();
@@ -76,8 +84,15 @@ public class Account {
         this.balance -= amt;
     }
     public void addInterest(double rate){
-        this.balance *= (1 + rate);
+        if(!this.accountType.equals("M")){
+            this.balance *= (1 + rate);
+        }
     }
+    // basic setter methods
+    public void setBalance(double amt){
+        this.balance = amt;
+    }
+
     // Mortgage methods
     public double mortgage(double costOfHouse) {
         double mortgage = (costOfHouse - mortgageDownPayment(costOfHouse)) * 1.06;

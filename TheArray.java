@@ -37,11 +37,32 @@ public class TheArray {
             accountList[numElements + 1] = account;
         }
     }
+    public void removeAccount(String accountLastName){
+        boolean proceed = false;
+        int selectedAccount = 0;
+        for(int i = 1; i <= this.getNumElements(); i++) {
+            String lastName = this.getAccount(i).getLastName();
+            if(accountLastName.equals(lastName)){
+                proceed = true;
+                selectedAccount = i;
+            }
+        }
+        if (proceed){
+            for(int i = selectedAccount; i <= this.getNumElements() - 1; i++){
+                this.accountList[i] = this.accountList[i + 1];
+            }
+            numElements --;
+        }
+    }
     // getters
     public int getCurrentSize(){
         return accountList.length;
     }
     public Account getAccount(int index){
         return accountList[index];
+    }
+    public int getNumElements(){
+        this.countElements();
+        return numElements;
     }
 }
