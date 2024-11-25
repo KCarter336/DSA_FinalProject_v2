@@ -5,7 +5,7 @@
 
 import java.util.Objects;
 import java.util.Scanner;
-
+import java.time.Instant;
 public class Driver {
 
     public static void main(String[] args){
@@ -207,6 +207,7 @@ public class Driver {
                 case 8:
                     // linear search for account by last name
                     // open submenu for deposit / withdrawal stuff
+                    long timeBegin = System.nanoTime();
                     System.out.println("Enter last name: ");
                     name = cin.nextLine();
                     proceed = false;
@@ -218,6 +219,9 @@ public class Driver {
                             selectedAccount = i;
                         }
                     }
+                    long timeEnd = System.nanoTime();
+                    long timeElapsed = (timeEnd - timeBegin);
+                    System.out.printf("Search time in nanoseconds: %d \n", timeElapsed);
                     if(proceed){
                         System.out.println(
                                 "   Submenu: " +

@@ -33,6 +33,8 @@ public class Account {
         this.lastName = lastName;
         this.accountType = accountType;
         this.person = person;
+        this.accountNum = this.randAccountNum();
+        this.SSN = this.randSSN();
         this.balance = balance;
     }
 
