@@ -65,4 +65,8 @@ public class TheArray {
         this.countElements();
         return numElements;
     }
+    // setters
+    public void setAccount(int index, Account account){
+        accountList[index] = account;
+    }
 }

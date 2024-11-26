@@ -17,6 +17,7 @@ public class Account {
     private int person;
     private double balance;
     private double costOfHouse;
+    private int nameAsNum;
 
     // Random account constructor
     public Account(String accountType, int person, String firstName, String lastName) {
@@ -26,6 +27,7 @@ public class Account {
         this.person = person;
         this.accountNum = this.randAccountNum();
         this.SSN = this.randSSN();
+        this.nameAsNum = SearchSortAlgorithms.nameToNum(lastName);
     }
     // Specified account constructor
     public Account(String accountType, int person, String firstName, String lastName, double balance) {
@@ -36,6 +38,7 @@ public class Account {
         this.accountNum = this.randAccountNum();
         this.SSN = this.randSSN();
         this.balance = balance;
+        this.nameAsNum = SearchSortAlgorithms.nameToNum(lastName);
     }
 
      // Mortgage account constructor
@@ -44,6 +47,7 @@ public class Account {
         this.lastName = lastName;
         this.person = person;
         this.balance = balance;
+        this.nameAsNum = SearchSortAlgorithms.nameToNum(lastName);
     }
 
     // Loan account constructor
@@ -86,6 +90,10 @@ public class Account {
     public double getBalance(){
         return this.balance;
     }
+    public int getNameAsNum(){
+        return this.nameAsNum;
+    }
+
     // Basic setter methods
     public void deposit(double amt){
         this.balance += amt;
