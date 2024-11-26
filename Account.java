@@ -50,6 +50,14 @@ public class Account {
         this.nameAsNum = SearchSortAlgorithms.nameToNum(lastName);
     }
 
+     // Mortgage account constructor
+    public Account(int person, String firstName, String lastName, double balance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.person = person;
+        this.balance = balance;
+    }
+
     // Loan account constructor
     // commented out because it errors against the specified account constructor. I figured we could keep track of the difference
     // by assigning loan accounts account type "M" for mortgage, and dealing with them differently on that basis

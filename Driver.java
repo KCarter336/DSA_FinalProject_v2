@@ -156,7 +156,8 @@ public class Driver {
                     Account added1 = new Account(type, person, first, last, balance);
                     accountList.addAccount(added1);
                     break;
-                case 4:
+
+                  case 4:
                     double numOfYears;
                     double downPayment;
                     System.out.println("Please enter a first name: ");
@@ -187,27 +188,29 @@ public class Driver {
                     System.out.println("Interest added to all accounts");
                     break;
                 case 6:
-                    for (int i = 0; i < accountList.getNumElements(); i++) {
-                        int ThisPerson = accountList.getAccount(i).getPerson();
-                        if (ThisPerson == 1) {
-                            if (accountList.getAccount(i).getBalance() < 100) {
-                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
-                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
-                                System.out.println("*Below minimum balance fee added*");
-                                accountList.getAccount(i).withdrawal(5.0);
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        if (accountList.getAccount(i) != null) {
+                            if (accountList.getAccount(i).getPerson() == 1) {
+                                if(accountList.getAccount(i).getBalance() < 100) {
+                                    System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                    System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                    System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
+                                    System.out.println("*Below minimum balance fee added*\n");
+                                    accountList.getAccount(i).withdrawal(5.0);
+                                }
                             }
                         }
                     }
                     break;
                 case 7:
-                    for (int i = 0; i < accountList.getNumElements(); i++) {
-                        int thePerson = accountList.getAccount(i).getPerson();
-                        if (thePerson == 2) {
-                            if (accountList.getAccount(i).getBalance() > 5000) {
-                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
-                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        if (accountList.getAccount(i) != null) {
+                            if (accountList.getAccount(i).getPerson() == 2 || accountList.getAccount(i).getPerson() == 3) {
+                                if(accountList.getAccount(i).getBalance() > 5000) {
+                                    System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                    System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                    System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType() + "\n");
+                                }
                             }
                         }
                     }
@@ -220,9 +223,11 @@ public class Driver {
                     name = cin.nextLine();
                     proceed = false;
                     selectedAccount = 0;
-                    for (int i = 1; i <= accountList.getNumElements(); i++) {
+
+                    for(int i = 1; i <= accountList.getNumElements(); i++) {
                         lastName = accountList.getAccount(i).getLastName();
-                        if (name.equals(lastName)) {
+                        if(name.equals(lastName)){
+
                             proceed = true;
                             selectedAccount = i;
                         }
@@ -295,29 +300,32 @@ public class Driver {
                     break;
                 case 9:
                     int count = 0;
-                    for (int i = 0; i < accountList.getNumElements(); i++) {
-                        String typeA = accountList.getAccount(i).getAccountType();
-                        if (typeA.equals("S")) {
+                    for(int i = 1; i < accountList.getNumElements(); i++) {
+                        type = accountList.getAccount(i).getAccountType();
+                        if(type.equals("S")) {
                             count += 1;
                         }
                     }
                     String[] firstNames = new String[count];
                     count = 0;
-                    for (int i = 0; i < accountList.getNumElements(); i++) {
-                        String typeB = accountList.getAccount(i).getAccountType();
-                        if (typeB.equals("S")) {
+                    for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                        type = accountList.getAccount(i).getAccountType();
+                        if(type.equals("S")) {
                             firstNames[count] = accountList.getAccount(i).getFirstName();
                             count += 1;
                         }
                     }
+                    long start = System.nanoTime();
                     bubbleSort(firstNames);
-                    for (String target : firstNames) {
-                        for (int i = 0; i < accountList.getNumElements(); i++) {
-                            if (accountList.getAccount(i).getFirstName().equals(target)) {
+                    long stop = System.nanoTime();
+                    for(String target : firstNames) {
+                        for(int i = 1; i < accountList.getCurrentSize(); i++) {
+                            if(accountList.getAccount(i).getFirstName().equals(target)){
                                 System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
                                 System.out.println("Balance: $" + accountList.getAccount(i).getBalance() + "\n");
                             }
                         }
+                        System.out.printf("Time taken to sort accounts: %d Nano seconds\n", stop - start);
                     }
                     break;
                 case 10:
