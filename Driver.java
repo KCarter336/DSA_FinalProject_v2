@@ -194,24 +194,28 @@ public class Driver {
                     break;
                 case 6:
                     for(int i = 1; i < accountList.getCurrentSize(); i++) {
-                        if (accountList.getAccount(i).getPerson() == 1) {
-                            if(accountList.getAccount(i).getBalance() < 100) {
-                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
-                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
-                                System.out.println("*Below minimum balance fee added*\n");
-                                accountList.getAccount(i).withdrawal(5.0);
+                        if (accountList.getAccount(i) != null) {
+                            if (accountList.getAccount(i).getPerson() == 1) {
+                                if(accountList.getAccount(i).getBalance() < 100) {
+                                    System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                    System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                    System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType());
+                                    System.out.println("*Below minimum balance fee added*\n");
+                                    accountList.getAccount(i).withdrawal(5.0);
+                                }
                             }
                         }
                     }
                     break;
                 case 7:
                     for(int i = 1; i < accountList.getCurrentSize(); i++) {
-                        if (accountList.getAccount(i).getPerson() == 2 || accountList.getAccount(i).getPerson() == 3) {
-                            if(accountList.getAccount(i).getBalance() > 5000) {
-                                System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
-                                System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
-                                System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType() + "\n");
+                        if (accountList.getAccount(i) != null) {
+                            if (accountList.getAccount(i).getPerson() == 2 || accountList.getAccount(i).getPerson() == 3) {
+                                if(accountList.getAccount(i).getBalance() > 5000) {
+                                    System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
+                                    System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
+                                    System.out.println("Account Type (C=Checking S=Savings): " + accountList.getAccount(i).getAccountType() + "\n");
+                                }
                             }
                         }
                     }
@@ -312,7 +316,9 @@ public class Driver {
                             count += 1;
                         }
                     }
+                    long start = System.nanoTime();
                     bubbleSort(firstNames);
+                    long stop = System.nanoTime();
                     for(String target : firstNames) {
                         for(int i = 1; i < accountList.getCurrentSize(); i++) {
                             if(accountList.getAccount(i).getFirstName().equals(target)){
@@ -320,6 +326,7 @@ public class Driver {
                                 System.out.println("Balance: $" + accountList.getAccount(i).getBalance() + "\n");
                             }
                         }
+                        System.out.printf("Time taken to sort accounts: %d Nano seconds\n", stop - start);
                     }
                     break;
                 case 10:
