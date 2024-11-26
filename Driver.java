@@ -54,7 +54,9 @@ public class Driver {
                             "\n Display employee accounts with balance over $5000 (7)" +
                             "\n Individual account actions (8)" +
                             "\n Display all saving accounts (9)" +
-                            "\n Exit  (10)" +
+                            "\n Sort accounts by account num (10)" +
+                            "\n Perform binary search by last name (11)" +
+                            "\n Exit  (12)" +
                             "\n Enter selection here: "
             );
             Scanner cin = new Scanner(System.in);
