@@ -5,10 +5,9 @@
 
 import java.util.Objects;
 import java.util.Scanner;
-
 public class Driver {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         // Variables for deposit and withdrawal. They're up here so they can be reused
         String name;
@@ -41,10 +40,9 @@ public class Driver {
         accountList.addAccount(facMor1);
 
 
-
         boolean go = true;
 
-        while (go){
+        while (go) {
             System.out.println(
                     "Menu: " +
                             "\n Display all accounts (1) " +
@@ -62,10 +60,10 @@ public class Driver {
             Scanner cin = new Scanner(System.in);
             int selection = cin.nextInt();
             cin.nextLine();
-            switch (selection){
+            switch (selection) {
                 case 1:
-                    for(int i = 1; i <= accountList.getNumElements(); i++) {
-                        System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " "+ accountList.getAccount(i).getLastName());
+                    for (int i = 1; i <= accountList.getNumElements(); i++) {
+                        System.out.println("Name: " + accountList.getAccount(i).getFirstName() + " " + accountList.getAccount(i).getLastName());
                         System.out.println("Balance: $" + accountList.getAccount(i).getBalance());
                         System.out.println("Account Type (C=Checking S=Savings M=Mortgage): " + accountList.getAccount(i).getAccountType());
                         System.out.println("Account Number: " + accountList.getAccount(i).getAccountNum() + "\n");
@@ -78,23 +76,20 @@ public class Driver {
                     int numMortgage = 0;
                     int numStudent = 0;
                     int numEmployee = 0;
-                    for(int i = 1; i <= accountList.getNumElements(); i++) {
+                    for (int i = 1; i <= accountList.getNumElements(); i++) {
                         String type = accountList.getAccount(i).getAccountType();
                         int person = accountList.getAccount(i).getPerson();
-                        if(type.equals("S")){
-                            numSavings ++;
+                        if (type.equals("S")) {
+                            numSavings++;
+                        } else if (type.equals("C")) {
+                            numChecking++;
+                        } else if (type.equals("M")) {
+                            numMortgage++;
                         }
-                        else if(type.equals("C")){
-                            numChecking ++;
-                        }
-                        else if(type.equals("M")){
-                            numMortgage ++;
-                        }
-                        if (person == 1){
-                            numStudent ++;
-                        }
-                        else if (person == 2 || person == 3){
-                            numEmployee ++;
+                        if (person == 1) {
+                            numStudent++;
+                        } else if (person == 2 || person == 3) {
+                            numEmployee++;
                         }
                     }
                     // opening submenu to choose which type of account to learn about
@@ -111,7 +106,7 @@ public class Driver {
                     );
                     // making the selection and determining what to do with it
                     int submenuSelection = cin.nextInt();
-                    switch (submenuSelection){
+                    switch (submenuSelection) {
                         case 1:
                             System.out.println(numEmployee + numStudent);
                             break;
@@ -149,7 +144,7 @@ public class Driver {
                     System.out.println("Please enter an initial balance: ");
                     double balance = cin.nextDouble();
                     cin.nextLine();
-                    if(type.equals("M")){
+                    if (type.equals("M")) {
                         System.out.println("Please enter down payment: ");
                         down = cin.nextDouble();
                         System.out.println("Please enter a time scale (years): ");
@@ -161,8 +156,8 @@ public class Driver {
                     Account added1 = new Account(type, person, first, last, balance);
                     accountList.addAccount(added1);
                     break;
-                case 4:
-                    case 4:
+
+                  case 4:
                     double numOfYears;
                     double downPayment;
                     System.out.println("Please enter a first name: ");
@@ -185,8 +180,8 @@ public class Driver {
                     break;
                 case 5:
                     // all accounts.addInterest
-                    for(int i = 1; i <= accountList.getNumElements(); i++) {
-                        if(!Objects.equals(accountList.getAccount(i).getAccountType(), "M")){
+                    for (int i = 1; i <= accountList.getNumElements(); i++) {
+                        if (!Objects.equals(accountList.getAccount(i).getAccountType(), "M")) {
                             accountList.getAccount(i).addInterest(0.05);
                         }
                     }
@@ -223,18 +218,24 @@ public class Driver {
                 case 8:
                     // linear search for account by last name
                     // open submenu for deposit / withdrawal stuff
+                    long timeBegin = System.nanoTime();
                     System.out.println("Enter last name: ");
                     name = cin.nextLine();
                     proceed = false;
                     selectedAccount = 0;
+
                     for(int i = 1; i <= accountList.getNumElements(); i++) {
                         lastName = accountList.getAccount(i).getLastName();
                         if(name.equals(lastName)){
+
                             proceed = true;
                             selectedAccount = i;
                         }
                     }
-                    if(proceed){
+                    long timeEnd = System.nanoTime();
+                    long timeElapsed = (timeEnd - timeBegin);
+                    System.out.printf("Search time in nanoseconds: %d \n", timeElapsed);
+                    if (proceed) {
                         System.out.println(
                                 "   Submenu: " +
                                         "\n     Check balance (1) " +
@@ -247,7 +248,7 @@ public class Driver {
                                         "\n     Enter selection here: "
                         );
                         int submenuChoice = cin.nextInt();
-                        switch (submenuChoice){
+                        switch (submenuChoice) {
                             case 1:
                                 // checking balance
                                 System.out.println(accountList.getAccount(selectedAccount).getBalance());
@@ -255,12 +256,12 @@ public class Driver {
                             case 2:
                                 // withdrawal
                                 System.out.println("Input withdrawal amount: ");
-                                double amt = cin.nextDouble();
+                                double enteredAmt = cin.nextDouble();
+                                double amt = enteredAmt + 1;    // $1 withdrawal fee applied
                                 if (accountList.getAccount(selectedAccount).getBalance() > amt) {
                                     accountList.getAccount(selectedAccount).withdrawal(amt);
                                     System.out.println("Balance: " + accountList.getAccount(selectedAccount).getBalance());
-                                }
-                                else{
+                                } else {
                                     System.out.printf("Sorry, you don't have enough funds. Balance is: %f \n", accountList.getAccount(selectedAccount).getBalance());
                                 }
                                 break;
@@ -280,12 +281,11 @@ public class Driver {
                                 break;
                             case 6:
                                 // pay mortgage and delete account
-                                if(accountList.getAccount(selectedAccount).getAccountType().equals("M")){
+                                if (accountList.getAccount(selectedAccount).getAccountType().equals("M")) {
                                     accountList.getAccount(selectedAccount).setBalance(0);
                                     accountList.removeAccount(name);
                                     System.out.println("Mortgage paid and account closed");
-                                }
-                                else{
+                                } else {
                                     System.out.println("This is not a mortgage account. This operation is not applicable");
                                 }
                                 break;
@@ -294,8 +294,7 @@ public class Driver {
                                 break;
 
                         }
-                    }
-                    else{
+                    } else {
                         System.out.println("We don't have an account in that name");
                     }
                     break;
@@ -330,12 +329,127 @@ public class Driver {
                     }
                     break;
                 case 10:
+                    // Main menu 10, selection sort all accounts by account num, keep track of how long it takes,
+                    // display sorted accounts and timing info
+                    long begin10 = System.nanoTime();
+                    SearchSortAlgorithms.selectionSort(accountList);
+                    System.out.println("Accounts sorted by account number: ");
+                    for (int i = 0; i < accountList.getNumElements(); i++) {
+                        if (accountList.getAccount(i) != null) {
+                            System.out.println(accountList.getAccount(i).getLastName());
+                            System.out.println(accountList.getAccount(i).getAccountNum());
+                        } else {
+                            System.out.println("-----------Null");
+                        }
+                    }
+                    long end10 = System.nanoTime();
+                    long elapsed10 = end10 - begin10;
+                    System.out.printf("Sort time in nanoseconds: %d \n", elapsed10);
+                    break;
+                case 11:
+                    // Main menu 11, binary search an account by last name
+                    // (you should use insertion sort to sort on last name before doing the binary search),
+                    // display complete information about the account and print the time taken to do the binary search.
+                    // After binary search is complete present the submenu for that account
+                    //Submenu:
+                    //1. Check balance
+                    //2. Withdraw money
+                    //3. Deposit money
+                    //4. Change last name
+                    //5. Change account type (ex. From saving to checking)
+                    //6. Close (Delete) the account
+                    //7. Pay Mortgage and close (Delete) the account
+                    //8. Back to main menu
+                    // selection sort
+                    SearchSortAlgorithms.insertionSort(accountList);
+
+                    // taking input of name
+                    System.out.println("Input lastname: ");
+                    String nameSearched = cin.nextLine();
+
+                    // binary search and timing
+                    long timeBegin11 = System.nanoTime();
+                    int indexOfNameSearched = SearchSortAlgorithms.binarySearch(accountList, nameSearched);
+                    long timeEnd11 = System.nanoTime();
+                    long timeElapsed11 = (timeEnd11 - timeBegin11);
+                    System.out.printf("Search time in nanoseconds: %d \n", timeElapsed11);
+
+                    selectedAccount = indexOfNameSearched;
+                    name = nameSearched;
+
+                    // displaying account info
+                    System.out.println("Name: " + accountList.getAccount(indexOfNameSearched).getFirstName() + " " + accountList.getAccount(indexOfNameSearched).getLastName());
+                    System.out.println("Balance: $" + accountList.getAccount(indexOfNameSearched).getBalance());
+                    System.out.println("Account Type (C=Checking S=Savings M=Mortgage): " + accountList.getAccount(indexOfNameSearched).getAccountType());
+                    System.out.println("Account Number: " + accountList.getAccount(indexOfNameSearched).getAccountNum() + "\n");
+                    // submenu
+                    System.out.println(
+                            "   Submenu: " +
+                                    "\n     Check balance (1) " +
+                                    "\n     Make withdrawal (2) " +
+                                    "\n     Make deposit (3) " +
+                                    "\n     Add interest (4)" +
+                                    "\n     Delete the account (5)" +
+                                    "\n     Pay mortgage and delete the account (6)" +
+                                    "\n     Back to main menu (7)" +
+                                    "\n     Enter selection here: "
+                    );
+                    int submenuChoice = cin.nextInt();
+                    switch (submenuChoice) {
+                        case 1:
+                            // checking balance
+                            System.out.println(accountList.getAccount(selectedAccount).getBalance());
+                            break;
+                        case 2:
+                            // withdrawal
+                            System.out.println("Input withdrawal amount: ");
+                            double enteredAmt = cin.nextDouble();
+                            double amt = enteredAmt + 1;    // $1 withdrawal fee applied
+                            if (accountList.getAccount(selectedAccount).getBalance() > amt) {
+                                accountList.getAccount(selectedAccount).withdrawal(amt);
+                                System.out.println("Balance: " + accountList.getAccount(selectedAccount).getBalance());
+                            } else {
+                                System.out.printf("Sorry, you don't have enough funds. Balance is: %f \n", accountList.getAccount(selectedAccount).getBalance());
+                            }
+                            break;
+                        case 3:
+                            // deposit
+                            System.out.println("Input deposit amount: ");
+                            double amount = cin.nextDouble();
+                            accountList.getAccount(selectedAccount).deposit(amount);
+                            System.out.println("Balance: " + accountList.getAccount(selectedAccount).getBalance());
+                            break;
+                        case 4:
+                            // add interest
+                            accountList.getAccount(selectedAccount).addInterest(0.05);
+                            break;
+                        case 5:
+                            accountList.removeAccount(name);
+                            break;
+                        case 6:
+                            // pay mortgage and delete account
+                            if (accountList.getAccount(selectedAccount).getAccountType().equals("M")) {
+                                accountList.getAccount(selectedAccount).setBalance(0);
+                                accountList.removeAccount(name);
+                                System.out.println("Mortgage paid and account closed");
+                            } else {
+                                System.out.println("This is not a mortgage account. This operation is not applicable");
+                            }
+                            break;
+                        case 7:
+                            // exit to main menu
+                            break;
+                    }
+                    break;
+                case 12:
                     System.exit(0);
             }
+
         }
     }
+
     public static void bubbleSort(String[] list) {
-        for (int i = 0; i < list.length - 1; i++) {
+        for (int i = 1; i < list.length - 1; i++) {
             for (int j = 0; j < list.length - i - 1; j++) {
                 if (list[j].compareTo(list[j + 1]) > 0) {
                     String temp = list[j];
