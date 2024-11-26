@@ -21,7 +21,7 @@ public class TheArray {
         }
     }
     public void increaseSize(){
-        Account[] increaseList = new Account[accountList.length + 1];
+        Account[] increaseList = new Account[accountList.length * 2];
         for(int i = 0; i < accountList.length; i ++){
             increaseList[i] = accountList[i];
         }
