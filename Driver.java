@@ -338,10 +338,7 @@ public class Driver {
                     System.out.println("Accounts sorted by account number: ");
                     for (int i = 0; i < accountList.getNumElements(); i++) {
                         if (accountList.getAccount(i) != null) {
-                            System.out.println(accountList.getAccount(i).getLastName());
-                            System.out.println(accountList.getAccount(i).getAccountNum());
-                        } else {
-                            System.out.println("-----------Null");
+                            System.out.printf("%s:      %d\n", accountList.getAccount(i).getLastName(), accountList.getAccount(i).getAccountNum());
                         }
                     }
                     long end10 = System.nanoTime();
